@@ -9,7 +9,7 @@ You have an error in your SQL syntax; check the manual that corresponds to your 
 
 + 猜测语句
 
-```
+```mysql
 有效判断语句为
 ' LIMIT 0,1
 猜测
