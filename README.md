@@ -21,7 +21,7 @@ echo "你的 sql 语句是：".$sql."<br>";
 ```
 
 - information_schema -- 系统数据库，记录当前数据库的数据库，表，列，用户权限等信息
-  - SCHEMATA表:储存mysql所有数据库的基本信息，包括数据库名，编码类型路径等，show databases的结果取之此表。
+- SCHEMATA表:储存mysql所有数据库的基本信息，包括数据库名，编码类型路径等，show databases的结果取之此表。
 - TABLES表:储存mysql中的表信息，（当然也有数据库名这一列，这样才能找到哪个数据库有哪些表嘛）包括这个表是基本表还是系统表，数据库的引擎是什么，表有多少行，创建时间，最后更新时间等。show tables from schemaname的结果取之此表
-  - COLUMNS表：提供了表中的列信息，（当然也有数据库名和表名称这两列）详细表述了某张表的所有列以及每个列的信息，包括该列是那个表中的第几列，列的数据类型，列的编码类型，列的权限，猎德注释等。是show columns from schemaname.tablename的结果取之此表。 
+- COLUMNS表：提供了表中的列信息，（当然也有数据库名和表名称这两列）详细表述了某张表的所有列以及每个列的信息，包括该列是那个表中的第几列，列的数据类型，列的编码类型，列的权限，猎德注释等。是show columns from schemaname.tablename的结果取之此表。 
 - 详情：<http://wenku.baidu.com/link?url=bIA38Slp-g2Bob4VDuTSVY8e04Beqq9Xac4I90UMC9ziQuzxiukpEh5abPK-woB9tuQ4DuY_KhKW-eTHH6ACSiMJmRhctiHvijOEFmENBbS>
